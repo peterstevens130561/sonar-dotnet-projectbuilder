@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package com.stevpet.sonar.plugins.dotnet.resharper;
+package com.stevpet.sonar.plugins.dotnet.projectbuilder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,12 +33,12 @@ import org.sonar.api.resources.Qualifiers;
 /**
  * Constants & configuration of the ReSharper plugin. Class does no validation whatsooever of the properties
  */
-public class ReSharperConfiguration implements BatchExtension {
+public class ProjectBuilderConfiguration implements BatchExtension {
 
     
     private Settings settings;
 
-    public ReSharperConfiguration(Settings settings) {
+    public ProjectBuilderConfiguration(Settings settings) {
         this.settings = settings;
     }
     public static final String DEFAULT_CACHEDIR = "inspectcode_cache";
