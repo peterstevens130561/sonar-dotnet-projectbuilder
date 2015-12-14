@@ -22,9 +22,9 @@ public class VisualStudioModuleBuilder {
         this.sonarRootProject = sonarRootProject;
     }
 
-    public boolean contains(SimpleVisualStudioProject visualStudioProject) {
+    public boolean contains(VisualStudioProject project) {
         List<ProjectDefinition> subProjects = sonarRootProject.getSubProjects();
-        String key = getKey(visualStudioProject);
+        String key = getKey(project);
         for(ProjectDefinition module:subProjects) {
             String moduleKey=module.getKey();
             if(key.equals(moduleKey)) {
@@ -36,28 +36,28 @@ public class VisualStudioModuleBuilder {
     }
     /**
      * Prepare a module for addition
-     * @param visualStudioProject
+     * @param project
      */
-    public void add(SimpleVisualStudioProject visualStudioProject) {
+    public void add(VisualStudioProject project) {
 
         ProjectDefinition newProject = ProjectDefinition.create();
         Properties properties = (Properties) sonarRootProject.getProperties().clone();
         newProject.setProperties(properties);
         
-        String name = visualStudioProject.getAssemblyName();
+        String name = project.getAssemblyName();
         newProject.setName(name);
         
-        String key = getKey(visualStudioProject);
+        String key = getKey(project);
         newProject.setKey(key); 
 
-        String assembly = visualStudioProject.getArtifact(null, null).getAbsolutePath();
+        String assembly = project.getArtifactFile().getAbsolutePath();
         newProject.setProperty("sonar.cs.fxcop.assembly", assembly);
 
-        File projectDirectory = visualStudioProject.getDirectory();
+        File projectDirectory = project.getDirectory();
         newProject.setBaseDir(projectDirectory);
         
         newProject.setWorkDir(new File(projectDirectory, ".sonar"));
-        if(visualStudioProject.isUnitTest()) {
+        if(project.isUnitTest()) {
             newProject.resetTestDirs();
             newProject.resetSourceDirs();
             newProject.setTestDirs(projectDirectory);

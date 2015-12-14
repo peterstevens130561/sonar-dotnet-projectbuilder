@@ -22,6 +22,8 @@
  *******************************************************************************/
 package com.stevpet.sonar.plugins.dotnet.projectbuilder;
 
+import com.stevpet.sonar.plugins.dotnet.utils.vstowrapper.VisualStudioProject;
+import com.stevpet.sonar.plugins.dotnet.utils.vstowrapper.implementation.HierarchyBuilder;
 import com.stevpet.sonar.plugins.dotnet.utils.vstowrapper.implementation.SimpleVisualStudioProject;
 import com.stevpet.sonar.plugins.dotnet.utils.vstowrapper.implementation.VisualStudioAssemblyLocator;
 import com.stevpet.sonar.plugins.dotnet.utils.vstowrapper.implementation.VisualStudioSolutionHierarchyHelper;
@@ -50,14 +52,14 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
 
 	private ProjectDefinition sonarRootProject;
 	private VisualStudioModuleBuilder moduleBuilder;
-	private VisualStudioSolutionHierarchyHelper hierarchyHelper ;
+	private HierarchyBuilder hierarchyHelper ;
 
 	public VisualStudioProjectBuilder( Settings settings) {
 		this(new VisualStudioModuleBuilder(),new VisualStudioSolutionHierarchyHelper(settings,new VisualStudioAssemblyLocator(settings)));
 	}
 
 	private VisualStudioProjectBuilder( VisualStudioModuleBuilder moduleBuilder,
-			VisualStudioSolutionHierarchyHelper hierarchyHelper) {
+			HierarchyBuilder hierarchyHelper) {
 		this.moduleBuilder = moduleBuilder;
 		this.hierarchyHelper= hierarchyHelper ;
 	}
@@ -69,9 +71,9 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
 		LOG.info("Building project structure for {} ", sonarRootProject.getName());
 		moduleBuilder.setRoot(sonarRootProject);
 		hierarchyHelper.build(sonarRootProject.getBaseDir());
-		List<SimpleVisualStudioProject> projects=hierarchyHelper.getProjects();
+		List<VisualStudioProject> projects=hierarchyHelper.getProjects();
 		
-		for (SimpleVisualStudioProject project : projects) {
+		for (VisualStudioProject project : projects) {
 			if (!moduleBuilder.contains(project)) {
 				moduleBuilder.add(project);
 			}
