@@ -24,7 +24,6 @@ package com.stevpet.sonar.plugins.dotnet.projectbuilder;
 
 import com.stevpet.sonar.plugins.dotnet.utils.vstowrapper.VisualStudioProject;
 import com.stevpet.sonar.plugins.dotnet.utils.vstowrapper.implementation.HierarchyBuilder;
-import com.stevpet.sonar.plugins.dotnet.utils.vstowrapper.implementation.SimpleVisualStudioProject;
 import com.stevpet.sonar.plugins.dotnet.utils.vstowrapper.implementation.VisualStudioAssemblyLocator;
 import com.stevpet.sonar.plugins.dotnet.utils.vstowrapper.implementation.VisualStudioSolutionHierarchyHelper;
 

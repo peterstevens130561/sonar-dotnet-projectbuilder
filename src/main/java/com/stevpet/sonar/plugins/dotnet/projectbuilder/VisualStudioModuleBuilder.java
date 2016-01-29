@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 
 import com.stevpet.sonar.plugins.dotnet.utils.vstowrapper.VisualStudioProject;
-import com.stevpet.sonar.plugins.dotnet.utils.vstowrapper.implementation.SimpleVisualStudioProject;
 
 public class VisualStudioModuleBuilder {
 
