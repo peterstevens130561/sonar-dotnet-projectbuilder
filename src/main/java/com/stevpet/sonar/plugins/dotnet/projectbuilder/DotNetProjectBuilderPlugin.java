@@ -7,7 +7,8 @@ import org.sonar.api.SonarPlugin;
 
 public class DotNetProjectBuilderPlugin extends SonarPlugin {
 
-    @Override
+    @SuppressWarnings("rawtypes")
+	@Override
     public List getExtensions() {
         List exported=Arrays.asList(
                 VisualStudioProjectBuilder.class);
